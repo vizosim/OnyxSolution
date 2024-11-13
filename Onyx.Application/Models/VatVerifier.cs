@@ -1,17 +1,6 @@
+using Onyx.Application.VAT;
+
 namespace Onyx.Application.Models;
-
-public enum VerificationStatus
-{
-    Valid,
-    Invalid,
-    // Unable to get status (e.g. service unavailable)
-    Unavailable
-}
-
-public interface IVatVerifier
-{
-    Task<VatVerificationResult> VerifyVAT(string countryCode, string vatId);
-}
 
 public class VatVerifier : IVatVerifier
 {
@@ -42,29 +31,7 @@ public class VatVerifier : IVatVerifier
     }
 }
 
-public interface IVarVerificationService
+public interface IVatVerifier
 {
-    Task<VatVerificationResult> VerifyVAT(VatVerificationRequest request);
+    Task<VatVerificationResult> VerifyVAT(string countryCode, string vatId);
 }
-
-public class VarVerificationService : IVarVerificationService
-{
-    private readonly checkVatPortTypeClient _client;
-
-    public VarVerificationService()
-    {
-        _client = new checkVatPortTypeClient();
-    }
-
-    public async Task<VatVerificationResult> VerifyVAT(VatVerificationRequest verificationRequest)
-    {
-        var result = await _client.checkVatAsync(new(verificationRequest.CountryCode, verificationRequest.VatId));
-
-        var status = result.valid ? VerificationStatus.Valid : VerificationStatus.Invalid;
-        return new VatVerificationResult(result.countryCode, result.vatNumber, status);
-    }
-}
-
-public record VatVerificationResult(string CountryCode, string VatNumber, VerificationStatus Status);
-
-public record VatVerificationRequest(string CountryCode, string VatId);
