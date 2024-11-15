@@ -29,6 +29,15 @@
         ON travelagents.travelagentid = observations.travelagentid
         WHERE observations.travelagentid IS NULL
 
+        // Other solution
+        SELECT travelagentid
+        FROM travelagents
+        WHERE NOT EXISTS (
+        SELECT 1
+        FROM observations
+        WHERE observations.travelagentid = travelagents.travelagentid
+        );
+
 
         d) Write a SQL query that finds all travel agents that have more than two observations.
 

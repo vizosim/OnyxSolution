@@ -2,11 +2,11 @@
 
 namespace Onyx.Application.VAT;
 
-public class VarVerificationService : IVarVerificationService
+public class VatVerificationService : IVarVerificationService
 {
     private readonly checkVatPortTypeClient _client;
 
-    public VarVerificationService()
+    public VatVerificationService()
     {
         _client = new checkVatPortTypeClient();
     }

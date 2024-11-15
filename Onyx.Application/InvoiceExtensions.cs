@@ -21,9 +21,10 @@ public static class InvoiceExtensions
     }
 
     /// <summary>
-    /// 
+    /// Get total number of nights per travel agent for invoice groups issued in specific year
     /// </summary>
-    /// <param name="invoiceGroups"></param>
+    /// <param name="invoiceGroups">Groups</param>
+    /// <param name="year">Issued Year</param>
     /// <returns></returns>
     public static IEnumerable<TravelAgentInfo> CalculateNumberOfNightsByTravelAgentWithDate(IEnumerable<InvoiceGroup> invoiceGroups, int year)
     {

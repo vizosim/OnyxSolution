@@ -26,7 +26,7 @@ builder.Services.Configure<JsonOptions>(options =>
 });
 
 builder.Services.AddScoped<IVatVerifier, VatVerifier>();
-builder.Services.AddScoped<IVarVerificationService, VarVerificationService>();
+builder.Services.AddScoped<IVarVerificationService, VatVerificationService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
